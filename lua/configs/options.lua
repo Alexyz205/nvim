@@ -1,5 +1,4 @@
 -- Load nvchad options
-require "nvchad.options"
 
 local opt = vim.opt
 local o = vim.o
@@ -35,3 +34,4 @@ opt.updatetime = 50
 
 opt.colorcolumn = "80"
 
+vim.g.mapleader = " "

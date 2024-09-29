@@ -17,12 +17,10 @@ return {
             config = {
                 header = vim.split(logo, "\n"),
                 footer = function()
-                    local stats = require("lazy").stats()
-                    local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-                    return {"⚡ Neovim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms"}
+                    return { "⚡ Powered by Alexis Pigeon." }
                 end
             }
         }
     end,
-    dependencies = {{'nvim-tree/nvim-web-devicons'}}
+    dependencies = { { 'nvim-tree/nvim-web-devicons' } }
 }

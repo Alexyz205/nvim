@@ -21,24 +21,31 @@ My philosophy with this setup is **simple, efficient, and minimal**. I aim for:
 
 ## Plugins I Use
 
-I use the [NvChad](https://nvchad.com/) distribution as the foundation for my Neovim setup, which comes with several pre-configured plugins and sensible defaults. 
-In addition, I've added a couple of extra tools to enhance my workflow:
+1. **[Catppuccin](https://github.com/catppuccin/nvim)**: A soothing pastel color scheme designed to be easy on the eyes, enhancing the aesthetic appeal of your Neovim environment.
 
-1. **[Tmux Navigator](https://github.com/christoomey/vim-tmux-navigator)**  
-   Efficient navigation between Tmux panes and Neovim splits without using the mouse or remembering complicated keybindings.
+2. **[Dashboard-nvim](https://github.com/glepnir/dashboard-nvim)**: A minimalist startup dashboard with customizable shortcuts, providing a clean interface when you launch Neovim.
 
-2. **[Lazygit](https://github.com/jesseduffield/lazygit)**  
-   A simple terminal UI for Git commands, providing a quick and easy way to manage repositories directly from Neovim.
-
-### Core Plugins (via NvChad)
-
-The NvChad distribution includes a collection of curated, optimized plugins, including:
-
-- **LSP (Language Server Protocol)**: For language intelligence (auto-completion, go-to-definition, linting, etc.).
-- **cmp**: For auto-completion, integrated with LSP.
-- **mason**: For managing LSP, DAP (Debugger Adapter Protocol), and other developer tools.
-- **Telescope**: A powerful fuzzy finder for searching files, text, and much more.
-- **Treesitter**: For better syntax highlighting and code parsing.
+3. **[Indent Blankline](https://github.com/lukas-reineke/indent-blankline.nvim)**: This plugin adds indentation guides to all lines, helping visualize code structure.
+   
+4. **[Comment.nvim](https://github.com/numToStr/Comment.nvim)**: A simple and easy-to-use plugin for quickly commenting code in any file type.
+   
+5. **[Conform.nvim](https://github.com/stevearc/conform.nvim)**: A powerful formatting tool that integrates with various formatters to keep your code well-structured and clean.
+   
+6. **[Gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)**: This plugin shows git diff information in the sign column, allowing for easy tracking of changes in files.
+   
+7. **[LSP Zero](https://github.com/VonHeikemen/lsp-zero.nvim)**: A comprehensive configuration setup for Neovim’s built-in LSP, making it easier to configure and use language servers.
+   
+8. **[Lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)**: A fast and flexible status line plugin, giving your Neovim a clean and functional status bar.
+   
+9. **[nvim-tree.lua](https://github.com/nvim-tree/nvim-tree.lua)**: A file explorer tree for Neovim that helps you easily navigate and manage your project files.
+   
+10. **[Telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)**: A highly extendable fuzzy finder plugin that enables fast searching, picking files, and content within Neovim.
+   
+11. **[nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)**: Provides better syntax highlighting, folding, and other features using tree-sitter for an enhanced code editing experience.
+   
+12. **[vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator)**: Facilitates seamless navigation between tmux panes and Neovim splits, improving workflow efficiency.
+   
+13. **[Which-Key.nvim](https://github.com/folke/which-key.nvim)**: A keybinding helper that shows available keymaps in a popup, helping users learn and remember key mappings.
 
 ## Key Features
 
@@ -52,7 +59,7 @@ To install this configuration:
 
 1. Clone the repository into your Neovim configuration directory:
    ```bash
-   git clone https://github.com/anathos221/nvim ~/.config/nvim
+   git clone https://github.com/alexyz205/nvim ~/.config/nvim
    ```
 
 2. Run Neovim, Lazyvim will automatically install and configure plugins.
@@ -60,10 +67,6 @@ To install this configuration:
 3. Ensure you have Tmux installed to take full advantage of the Tmux Navigator.
 
 4. Enjoy your optimized, lightweight, and highly customizable Neovim setup!
-
-Here’s an updated section to include in your `README.md` under **Customization**, detailing how users can configure and add plugins, modify keymaps, update Neovim options, and configure individual plugins based on your setup:
-
----
 
 ## Customization
 

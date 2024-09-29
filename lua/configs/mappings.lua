@@ -1,6 +1,3 @@
--- Load nvchad mappings
-require "nvchad.mappings"
-
 -- General
 local map = vim.keymap.set
 
@@ -11,24 +8,45 @@ map("i", "<C-l>", "<Right>", { desc = "move right" })
 map("i", "<C-j>", "<Down>", { desc = "move down" })
 map("i", "<C-k>", "<Up>", { desc = "move up" })
 
-map("n", "<C-h>", "<cmd>TmuxNavigateLeft<CR>", { desc = "switch window left" })
-map("n", "<C-j>", "<cmd>TmuxNavigateDown<CR>", { desc = "switch window down" })
-map("n", "<C-k>", "<cmd>TmuxNavigateUp<CR>", { desc = "switch window up" })
-map("n", "<C-l>", "<cmd>TmuxNavigateRight<CR>", { desc = "switch window right" })
-
 map("n", "<C-s>", "<cmd>w<CR>", { desc = "General Save file" })
 map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "General Copy whole file" })
 
 map("n", "<leader>h", "<cmd>sp<CR>", { desc = "Horizontal split" })
 map("n", "<leader>v", "<cmd>vsp<CR>", { desc = "Vertical split" })
-map("n", ";", ":", { desc = "CMD enter command mode" })
 
--- Formater
+-- visual mode mappings
+map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selected lines down" })
+map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selected lines up" })
+
+-- normal navigation
+map("n", "J", "mzJ`z", { desc = "Join lines without inserting a space" })
+map("n", "<C-d>", "<C-d>zz", { desc = "Scroll down and recenter cursor" })
+map("n", "<C-u>", "<C-u>zz", { desc = "Scroll up and recenter cursor" })
+map("n", "n", "nzzzv", { desc = "Go to next search result and recenter cursor" })
+map("n", "N", "Nzzzv", { desc = "Go to previous search result and recenter cursor" })
+
+-- yank and paste
+map("x", "<leader>p", [["_dP]], { desc = "Paste without yanking" })
+map({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank to system clipboard" })
+map("n", "<leader>Y", [["+Y]], { desc = "Yank entire line to system clipboard" })
+map({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete without yanking" })
+
+map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Substitute word under cursor" })
+
+map("n", "<leader><leader>", "<cmd>so<CR>", { desc = "Source current file" })
+
+
+-- buffer navigation
+map("n", "<tab>", "<cmd>bnext<CR>", { desc = "Next buffer" })
+map("n", "<s-tab>", "<cmd>bprevious<CR>", { desc = "Previous buffer" })
+map("n", "<leader>Q", "<cmd>bdelete<CR>", { desc = "Delete buffer" })
+
+-- formater
 map("n", "<leader>fm", function()
     require("conform").format { lsp_fallback = true }
 end, { desc = "General Format file" })
 
--- Comment
+-- comment
 map("n", "<C-_>", "gcc", { desc = "Toggle Comment", remap = true })
 map("v", "<C-_>", "gc", { desc = "Toggle comment", remap = true })
 
@@ -52,3 +70,9 @@ map(
     "<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>",
     { desc = "telescope find all files" }
 )
+
+-- tmux
+map("n", "<C-h>", "<cmd>TmuxNavigateLeft<CR>", { desc = "switch window left" })
+map("n", "<C-j>", "<cmd>TmuxNavigateDown<CR>", { desc = "switch window down" })
+map("n", "<C-k>", "<cmd>TmuxNavigateUp<CR>", { desc = "switch window up" })
+map("n", "<C-l>", "<cmd>TmuxNavigateRight<CR>", { desc = "switch window right" })
