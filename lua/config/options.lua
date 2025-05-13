@@ -1,8 +1,8 @@
--- Load nvchad options
-
 local opt = vim.opt
 local o = vim.o
 local g = vim.g
+
+g.snacks_animate = false
 
 opt.nu = true
 opt.relativenumber = true
