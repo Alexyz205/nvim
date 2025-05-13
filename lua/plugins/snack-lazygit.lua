@@ -19,13 +19,13 @@ return {
               "bold",
             },
             inactiveBorderColor = {
-              "#a6adc8",
+              "#f9e2af",
             },
             optionsTextColor = {
-              "#89b4fa",
+              "#cba6f7",
             },
             selectedLineBgColor = {
-              "#313244",
+              "#6c7086",
             },
             cherryPickedCommitBgColor = {
               "#45475a",
