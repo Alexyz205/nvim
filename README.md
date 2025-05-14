@@ -2,6 +2,18 @@
 
 Welcome to my Neovim configuration repository! This setup is built on top of LazyVim, providing a powerful foundation while being tailored for efficiency, simplicity, and ease of customization. It's optimized for performance and focused on keeping things lightweight by using a minimal number of essential plugins.
 
+## What is LazyVim?
+
+LazyVim is a Neovim setup powered by 💤 lazy.nvim to make it easy to customize and extend your config. It transforms your Neovim into a full-fledged IDE while maintaining blazing fast performance.
+
+### LazyVim Features
+
+- 🔥 Transforms Neovim into a full-fledged IDE
+- 💤 Easily customizable and extendable with lazy.nvim
+- 🚀 Blazingly fast performance
+- 🧹 Sane default settings for options, autocmds, and keymaps
+- 📦 Pre-configured with a wealth of plugins ready to use
+
 ## Why LazyVim?
 
 I chose LazyVim as the foundation for my Neovim setup because:
@@ -27,27 +39,45 @@ LazyVim includes many excellent plugins by default. Here are some of the key plu
 
 2. **[vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator)**: Facilitates seamless navigation between tmux panes and Neovim splits, improving workflow efficiency.
 
-LazyVim also provides these essential tools that I rely on:
+3. **[snacks.nvim](https://github.com/folke/snacks.nvim)**: A plugin by Folke that provides a beautiful dashboard and Lazygit integration with Catppuccin theming.
 
-3. **[Telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)**: A highly extendable fuzzy finder plugin that enables fast searching, picking files, and content within Neovim.
+LazyVim also provides these essential tools that I rely on:
 
 4. **[nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)**: Provides better syntax highlighting, folding, and other features using tree-sitter for an enhanced code editing experience.
 
-5. **[LSP Support](https://github.com/neovim/nvim-lspconfig)**: Comprehensive language server protocol integration for intelligent code completion, navigation, and analysis.
+5. **[LSP Support](https://github.com/neovim/nvim-lspconfig)**: Comprehensive language server protocol integration for intelligent code completion, navigation, and analysis with custom Mason configuration for certificate handling.
 
 6. **[Which-Key.nvim](https://github.com/folke/which-key.nvim)**: A keybinding helper that shows available keymaps in a popup, helping users learn and remember key mappings.
 
-7. **[nvim-tree.lua](https://github.com/nvim-tree/nvim-tree.lua)**: A file explorer tree for Neovim that helps you easily navigate and manage your project files.
-
 ## Key Features
 
-- **Seamless Navigation**: Thanks to the integration with Tmux Navigator, I can switch between Neovim and Tmux panes with ease.
-- **Git Integration**: LazyVim includes powerful Git tools for fast, in-editor Git operations, making repository management much smoother.
-- **Lightweight and Fast**: By leveraging LazyVim's lazy-loading capabilities, I've ensured that my editor is fast and responsive, even when working with large codebases.
+- **Seamless Navigation**: Thanks to the integration with Tmux Navigator, I can switch between Neovim and Tmux panes with ease using the same key bindings.
+- **Git Integration**: Lazygit integration through snacks.nvim with custom Catppuccin theming for a consistent look and feel.
+- **Dashboard & Picker**: The snacks.nvim plugin provides a clean, minimal dashboard and an integrated file picker that replaces Telescope, offering quick access to recent files, fuzzy finding, and common actions.
+- **Security Handling**: Custom configurations for Git and Mason to handle certificate validation in restricted environments.
+- **Lightweight and Fast**: By leveraging LazyVim's lazy-loading capabilities and disabling unnecessary plugins like bufferline and tokyonight, I've ensured that my editor is fast and responsive, even when working with large codebases.
 
 ## How to Install
 
-To install this configuration:
+### Requirements
+
+Before installing this configuration, make sure you have:
+
+- Neovim >= 0.9.0 (needs to be built with LuaJIT)
+- Git >= 2.19.0 (for partial clones support)
+- A Nerd Font (v3.0 or greater) for proper icons
+- A C compiler for nvim-treesitter
+- curl for completion engine
+- For LSP servers and other tools (Mason requirements):
+  - Node.js and npm for JavaScript/TypeScript LSP servers and tools
+  - Python 3 with pip and venv for Python-related servers and tools
+- Optional but recommended:
+  - lazygit for Git integration
+  - ripgrep for live grep functionality
+  - fd for finding files
+  - A terminal that supports true color and undercurl (Ghostty, Kitty, WezTerm, Alacritty, or iTerm2)
+
+### Installation Steps
 
 1. Clone the repository into your Neovim configuration directory:
    ```bash
@@ -82,24 +112,24 @@ To add new plugins, you can simply modify the `lua/plugins/` directory. Specific
 
 ### 2. Updating Key Mappings
 
-All key mappings are centralized in the `lua/configs/keymaps.lua` file. This is where you can define, modify, or remove key mappings to suit your workflow.
+All key mappings are centralized in the `lua/config/keymaps.lua` file. This is where you can define, modify, or remove key mappings to suit your workflow.
 
-- **Location**: `lua/configs/keymaps.lua`
+- **Location**: `lua/config/keymaps.lua`
 - **Example**: To add a new key mapping:
 
   ```lua
   local map = vim.keymap.set
   local opts = { noremap = true, silent = true }
 
-  -- Example: Mapping Ctrl+e to toggle nvim-tree
-  map('n', '<C-e>', ':NvimTreeToggle<CR>', opts)
+  -- Example: Mapping Ctrl+s to save the file
+  map("n", "<C-s>", "<cmd>w<CR>", { desc = "Save file" })
   ```
 
 ### 3. Modifying Neovim Options
 
-Neovim-specific options such as line numbering, tab spaces, and more are set in the `lua/configs/options.lua` file. Here you can tweak various options to align with your coding preferences.
+Neovim-specific options such as line numbering, tab spaces, and more are set in the `lua/config/options.lua` file. Here you can tweak various options to align with your coding preferences.
 
-- **Location**: `lua/configs/options.lua`
+- **Location**: `lua/config/options.lua`
 - **Example**: To change the tab width or enable relative line numbers:
 
   ```lua
@@ -124,8 +154,10 @@ LazyVim comes with many defaults that you might want to override. You can do thi
 
   ```lua
   return {
-    -- disable trouble.nvim
-    { "folke/trouble.nvim", enabled = false },
+    -- disable bufferline
+    { "akinsho/bufferline.nvim", enabled = false },
+    -- disable tokyonight
+    { "folke/tokyonight.nvim", enabled = false },
   }
   ```
 
@@ -135,6 +167,6 @@ For more details about LazyVim and its capabilities, refer to the [official Lazy
 
 ## Conclusion
 
-This Neovim setup is designed to enhance productivity while keeping things lean. It provides the necessary tools for a developer while avoiding the overhead of unnecessary features or plugins. If you're looking for a highly optimized yet customizable Neovim setup built on LazyVim, give this a try!
+This Neovim setup is designed to enhance productivity while keeping things lean. It provides the necessary tools for a developer while avoiding the overhead of unnecessary features or plugins. By maintaining a balance between functionality and simplicity, it offers a fast, efficient, and pleasant editing experience.
 
 Feel free to fork, modify, and improve this configuration to fit your workflow!
