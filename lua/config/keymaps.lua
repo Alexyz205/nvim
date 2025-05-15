@@ -36,3 +36,18 @@ map("n", "<C-h>", "<cmd>TmuxNavigateLeft<CR>", { desc = "switch window left" })
 map("n", "<C-j>", "<cmd>TmuxNavigateDown<CR>", { desc = "switch window down" })
 map("n", "<C-k>", "<cmd>TmuxNavigateUp<CR>", { desc = "switch window up" })
 map("n", "<C-l>", "<cmd>TmuxNavigateRight<CR>", { desc = "switch window right" })
+
+-- Quickfix list navigation
+map("n", "gqq", function()
+  for _, win in pairs(vim.fn.getwininfo()) do
+    if win.quickfix == 1 then
+      vim.cmd("cclose")
+      return
+    end
+  end
+  vim.cmd("copen")
+end, { desc = "Toggle quickfix list" })
+map("n", "gqn", "<cmd>cnext<CR>", { desc = "Next quickfix item" })
+map("n", "gqp", "<cmd>cprev<CR>", { desc = "Previous quickfix item" })
+map("n", "gqf", "<cmd>cfirst<CR>", { desc = "First quickfix item" })
+map("n", "gql", "<cmd>clast<CR>", { desc = "Last quickfix item" })
