@@ -11,11 +11,10 @@ map("i", "<C-k>", "<Up>", { desc = "move up" })
 map("n", "<C-s>", "<cmd>w<CR>", { desc = "General Save file" })
 map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "General Copy whole file" })
 
-map("n", "<leader>t", "<cmd>terminal<CR>i", { desc = "Launch terminal" })
-
 -- visual mode mappings
 map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selected lines down" })
 map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selected lines up" })
+map("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Substitute word under cursor" })
 
 -- normal navigation
 map("n", "J", "mzJ`z", { desc = "Join lines without inserting a space" })
@@ -31,11 +30,6 @@ map("n", "<leader>Y", [["+Y]], { desc = "Yank entire line to system clipboard" }
 map({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete without yanking" })
 
 map("n", "<leader><leader>", "<cmd>so<CR>", { desc = "Source current file" })
-
--- formater
-map("n", "<leader>fm", function()
-    require("conform").format { lsp_fallback = true }
-end, { desc = "General Format file" })
 
 -- tmux
 map("n", "<C-h>", "<cmd>TmuxNavigateLeft<CR>", { desc = "switch window left" })
