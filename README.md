@@ -41,21 +41,24 @@ LazyVim includes many excellent plugins by default. Here are some of the key plu
 
 3. **[snacks.nvim](https://github.com/folke/snacks.nvim)**: A plugin by Folke that provides a beautiful dashboard and Lazygit integration with Catppuccin theming.
 
+4. **[opencode.nvim](https://github.com/NickvanDyke/opencode.nvim)**: Integration with OpenCode for AI-powered code assistance, featuring custom prompts for code review, optimization, documentation, testing, and Clean Architecture refactoring.
+
 LazyVim also provides these essential tools that I rely on:
 
-4. **[nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)**: Provides better syntax highlighting, folding, and other features using tree-sitter for an enhanced code editing experience.
+5. **[nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)**: Provides better syntax highlighting, folding, and other features using tree-sitter for an enhanced code editing experience.
 
-5. **[LSP Support](https://github.com/neovim/nvim-lspconfig)**: Comprehensive language server protocol integration for intelligent code completion, navigation, and analysis with custom Mason configuration for certificate handling.
+6. **[LSP Support](https://github.com/neovim/nvim-lspconfig)**: Comprehensive language server protocol integration for intelligent code completion, navigation, and analysis with custom Mason configuration for certificate handling.
 
-6. **[Which-Key.nvim](https://github.com/folke/which-key.nvim)**: A keybinding helper that shows available keymaps in a popup, helping users learn and remember key mappings.
+7. **[Which-Key.nvim](https://github.com/folke/which-key.nvim)**: A keybinding helper that shows available keymaps in a popup, helping users learn and remember key mappings.
 
 ## Key Features
 
 - **Seamless Navigation**: Thanks to the integration with Tmux Navigator, I can switch between Neovim and Tmux panes with ease using the same key bindings.
+- **AI-Powered Development**: OpenCode integration provides intelligent code assistance with custom prompts for review, optimization, documentation, testing, and Clean Architecture refactoring.
 - **Git Integration**: Lazygit integration through snacks.nvim with custom Catppuccin theming for a consistent look and feel.
 - **Dashboard & Picker**: The snacks.nvim plugin provides a clean, minimal dashboard and an integrated file picker that replaces Telescope, offering quick access to recent files, fuzzy finding, and common actions.
 - **Security Handling**: Custom configurations for Git and Mason to handle certificate validation in restricted environments.
-- **Lightweight and Fast**: By leveraging LazyVim's lazy-loading capabilities and disabling unnecessary plugins like bufferline and tokyonight, I've ensured that my editor is fast and responsive, even when working with large codebases.
+- **Lightweight and Fast**: By leveraging LazyVim's lazy-loading capabilities and using only essential plugins, I've ensured that my editor is fast and responsive, even when working with large codebases.
 
 ## How to Install
 
