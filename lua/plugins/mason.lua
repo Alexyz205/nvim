@@ -3,7 +3,7 @@
 return {
 	-- Mason setup - core package management
 	{
-		"williamboman/mason.nvim",
+		"mason-org/mason.nvim",
 		version = "^1.0.0",
 		opts = function(_, opts)
 			-- Keep existing options
@@ -63,10 +63,10 @@ return {
 
 	-- Mason LSP config - ensures proper LSP server configuration
 	{
-		"williamboman/mason-lspconfig.nvim",
+		"mason-org/mason-lspconfig.nvim",
 		version = "^1.0.0",
 		dependencies = {
-			"williamboman/mason.nvim",
+			"mason-org/mason.nvim",
 		},
 		opts = function(_, opts)
 			-- Convert strings to table format if needed
