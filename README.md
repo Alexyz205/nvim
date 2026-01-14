@@ -2,6 +2,21 @@
 
 Welcome to my Neovim configuration repository! This setup is built on top of LazyVim, providing a powerful foundation while being tailored for efficiency, simplicity, and ease of customization. It's optimized for performance and focused on keeping things lightweight by using a minimal number of essential plugins.
 
+## Quick Start
+
+```bash
+# Clone the repository
+git clone https://github.com/alexyz205/nvim ~/.config/nvim
+
+# Launch Neovim (plugins will auto-install)
+nvim
+
+# Optional: Open the dashboard
+nvim +Dashboard
+```
+
+**First Launch**: LazyVim will automatically install all plugins. This may take a few minutes. Once complete, restart Neovim for the best experience.
+
 ## What is LazyVim?
 
 LazyVim is a Neovim setup powered by 💤 lazy.nvim to make it easy to customize and extend your config. It transforms your Neovim into a full-fledged IDE while maintaining blazing fast performance.
@@ -31,26 +46,6 @@ My philosophy with this setup is **simple, efficient, and minimal**. I aim for:
 - **Efficiency**: By using a minimal number of essential plugins, I ensure that my editor remains fast and lightweight, without unnecessary bloat.
 - **Minimal Plugins**: I use only the plugins that provide significant value, resisting the temptation to overload the editor with unnecessary tools.
 
-## Core Plugins
-
-LazyVim includes many excellent plugins by default. Here are some of the key plugins I've added or customized:
-
-1. **[Catppuccin](https://github.com/catppuccin/nvim)**: A soothing pastel color scheme designed to be easy on the eyes, enhancing the aesthetic appeal of your Neovim environment.
-
-2. **[vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator)**: Facilitates seamless navigation between tmux panes and Neovim splits, improving workflow efficiency.
-
-3. **[snacks.nvim](https://github.com/folke/snacks.nvim)**: A plugin by Folke that provides a beautiful dashboard and Lazygit integration with Catppuccin theming.
-
-4. **[opencode.nvim](https://github.com/NickvanDyke/opencode.nvim)**: Integration with OpenCode for AI-powered code assistance, featuring custom prompts for code review, optimization, documentation, testing, and Clean Architecture refactoring.
-
-LazyVim also provides these essential tools that I rely on:
-
-5. **[nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)**: Provides better syntax highlighting, folding, and other features using tree-sitter for an enhanced code editing experience.
-
-6. **[LSP Support](https://github.com/neovim/nvim-lspconfig)**: Comprehensive language server protocol integration for intelligent code completion, navigation, and analysis with custom Mason configuration for certificate handling.
-
-7. **[Which-Key.nvim](https://github.com/folke/which-key.nvim)**: A keybinding helper that shows available keymaps in a popup, helping users learn and remember key mappings.
-
 ## Key Features
 
 - **Seamless Navigation**: Thanks to the integration with Tmux Navigator, I can switch between Neovim and Tmux panes with ease using the same key bindings.
@@ -59,6 +54,93 @@ LazyVim also provides these essential tools that I rely on:
 - **Dashboard & Picker**: The snacks.nvim plugin provides a clean, minimal dashboard and an integrated file picker that replaces Telescope, offering quick access to recent files, fuzzy finding, and common actions.
 - **Security Handling**: Custom configurations for Git and Mason to handle certificate validation in restricted environments.
 - **Lightweight and Fast**: By leveraging LazyVim's lazy-loading capabilities and using only essential plugins, I've ensured that my editor is fast and responsive, even when working with large codebases.
+
+## Essential Keybindings
+
+This configuration uses `<Space>` as the leader key. Here are the most important keybindings:
+
+### General
+
+| Keybinding | Mode | Description |
+|------------|------|-------------|
+| `<Space>` | N | Leader key - opens Which-Key menu |
+| `<C-s>` | N | Save current file |
+| `<C-S>` | N | Save all files |
+| `<C-c>` | N | Copy entire file to clipboard |
+
+### Navigation
+
+| Keybinding | Mode | Description |
+|------------|------|-------------|
+| `<C-h/j/k/l>` | N | Navigate splits/tmux panes (left/down/up/right) |
+| `<C-d>` | N | Scroll down and center |
+| `<C-u>` | N | Scroll up and center |
+| `n` / `N` | N | Next/previous search result (centered) |
+
+### File Management
+
+| Keybinding | Mode | Description |
+|------------|------|-------------|
+| `<leader>e` | N/V | Open Yazi file manager at current file |
+| `<leader>E` | N | Open Yazi in working directory |
+| `<leader>ff` | N | Find files (LazyVim default) |
+| `<leader>sg` | N | Live grep (LazyVim default) |
+
+### Git Integration
+
+| Keybinding | Mode | Description |
+|------------|------|-------------|
+| `<leader>gg` | N | Open Lazygit (LazyVim default) |
+| `<leader>gb` | N | Git blame line (LazyVim default) |
+
+### AI Assistant (OpenCode)
+
+| Keybinding | Mode | Description |
+|------------|------|-------------|
+| `<leader>oc` | N | Toggle OpenCode interface |
+| `<leader>oa` | N/V | Ask OpenCode (with selection in visual) |
+| `<leader>op` | N/V | Select from custom prompts (review, fix, optimize, docs, tests, etc.) |
+| `<leader>on` | N | Start new OpenCode session |
+
+### Visual Mode
+
+| Keybinding | Mode | Description |
+|------------|------|-------------|
+| `J` | V | Move selected lines down |
+| `K` | V | Move selected lines up |
+| `<leader>p` | V | Paste without yanking |
+| `<leader>y` | V | Yank to system clipboard |
+
+### Insert Mode Navigation
+
+| Keybinding | Mode | Description |
+|------------|------|-------------|
+| `<C-b>` | I | Move to beginning of line |
+| `<C-e>` | I | Move to end of line |
+| `<C-h/j/k/l>` | I | Move cursor (left/down/up/right) |
+
+**Tip**: Press `<Space>` in normal mode to see all available keybindings with Which-Key!
+
+## Configuration Structure
+
+```
+~/.config/nvim/
+├── init.lua                 # Entry point, sets leader key
+├── lua/
+│   ├── config/
+│   │   ├── autocmds.lua    # Custom autocommands
+│   │   ├── keymaps.lua     # Custom keybindings
+│   │   ├── lazy.lua        # Lazy.nvim bootstrap
+│   │   └── options.lua     # Neovim options
+│   └── plugins/
+│       ├── disabled.lua    # Disabled LazyVim plugins
+│       ├── opencode.lua    # AI assistant configuration
+│       ├── snacks.lua      # Dashboard & Lazygit config
+│       ├── vim-tmux-navigator.lua
+│       └── yazi.lua        # File manager integration
+├── lazy-lock.json          # Plugin version lock
+└── lazyvim.json           # LazyVim extras configuration
+```
 
 ## How to Install
 
@@ -83,6 +165,7 @@ Before installing this configuration, make sure you have:
 ### Installation Steps
 
 1. Clone the repository into your Neovim configuration directory:
+
    ```bash
    git clone https://github.com/alexyz205/nvim ~/.config/nvim
    ```

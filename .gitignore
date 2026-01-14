@@ -1,2 +1,5 @@
-lazy-lock.json
-lazyvim.json
+# Neovim data and cache directories
+# These contain runtime data and should not be tracked
+.repro/
+debug/
+doc/tags

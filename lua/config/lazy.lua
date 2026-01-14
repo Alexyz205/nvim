@@ -1,7 +1,22 @@
+-- ============================================================================
+-- Lazy.nvim Plugin Manager Bootstrap
+-- ============================================================================
+-- Automatically installs and configures lazy.nvim plugin manager
+-- This file is loaded by init.lua and sets up the plugin ecosystem
+-- ============================================================================
+
+-- Install lazy.nvim if not already installed
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  local out = vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "--branch=stable",
+    lazyrepo,
+    lazypath,
+  })
   if vim.v.shell_error ~= 0 then
     vim.api.nvim_echo({
       { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
@@ -14,41 +29,53 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- ============================================================================
+-- Plugin Configuration
+-- ============================================================================
+
 require("lazy").setup({
   spec = {
-    -- add LazyVim and import its plugins
+    -- Import LazyVim base configuration and plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-    -- Configure LazyVim to load catppuccin-mocha
+
+    -- Set colorscheme to Catppuccin Mocha
     {
       "LazyVim/LazyVim",
       opts = {
         colorscheme = "catppuccin-mocha",
       },
     },
-    -- import/override with your plugins
+
+    -- Import custom plugins from lua/plugins/
     { import = "plugins" },
   },
+
   defaults = {
-    -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
-    -- If you know what you're doing, you can set this to `true` to have all your custom plugins lazy-loaded by default.
+    -- Custom plugins load during startup by default
+    -- Set to true to lazy-load all custom plugins
     lazy = false,
-    -- It's recommended to leave version=false for now, since a lot the plugin that support versioning,
-    -- have outdated releases, which may break your Neovim install.
-    version = false, -- always use the latest git commit
-    -- version = "*", -- try installing the latest stable version for plugins that support semver
+
+    -- Use latest git commit for plugins
+    -- Alternative: version = "*" for stable releases (if available)
+    version = false,
   },
+
   checker = {
-    enabled = true, -- check for plugin updates periodically
-    notify = false, -- notify on update
-  }, -- automatically check for plugin updates
+    enabled = true, -- Automatically check for plugin updates
+    notify = false, -- Don't show notifications for updates
+  },
+
+  -- ============================================================================
+  -- Performance Optimizations
+  -- ============================================================================
   performance = {
     rtp = {
-      -- disable some rtp plugins
+      -- Disable unused built-in Neovim plugins
       disabled_plugins = {
         "gzip",
-        -- "matchit",
-        -- "matchparen",
-        -- "netrwPlugin",
+        -- "matchit",     -- Keep for bracket matching
+        -- "matchparen",  -- Keep for parenthesis highlighting
+        -- "netrwPlugin", -- Keep if needed, we use Yazi instead
         "tarPlugin",
         "tohtml",
         "tutor",

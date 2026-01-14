@@ -1,43 +1,61 @@
-return
-{
+-- ============================================================================
+-- Yazi File Manager Integration
+-- ============================================================================
+-- Modern terminal file manager integration with Neovim
+-- Provides fast, feature-rich file navigation with image previews
+-- ============================================================================
+--
+-- Features:
+--   - Blazing fast file navigation
+--   - Image preview support
+--   - Bulk file operations
+--   - Integration with Neovim buffers
+--
+-- Dependencies:
+--   - yazi: Install via package manager (brew install yazi)
+--   - snacks.nvim: For terminal integration
+--
+-- Keybindings:
+--   <leader>e : Open yazi at current file location
+--   <leader>E : Open yazi in working directory
+--   <C-up>    : Resume last yazi session
+--
+-- See: https://github.com/mikavilpas/yazi.nvim
+-- ============================================================================
+
+return {
   "mikavilpas/yazi.nvim",
   event = "VeryLazy",
   dependencies = {
-    -- check the installation instructions at
-    -- https://github.com/folke/snacks.nvim
-    "folke/snacks.nvim"
+    "folke/snacks.nvim",
   },
   keys = {
-    -- 👇 in this section, choose your own keymappings!
     {
       "<leader>e",
       mode = { "n", "v" },
       "<cmd>Yazi<cr>",
-      desc = "Open yazi at the current file",
+      desc = "Open yazi at current file",
     },
     {
-      -- Open in the current working directory
       "<leader>E",
       "<cmd>Yazi cwd<cr>",
-      desc = "Open the file manager in nvim's working directory",
+      desc = "Open yazi in working directory",
     },
     {
       "<c-up>",
       "<cmd>Yazi toggle<cr>",
-      desc = "Resume the last yazi session",
+      desc = "Resume last yazi session",
     },
   },
   opts = {
-    -- if you want to open yazi instead of netrw, see below for more info
+    -- Don't hijack netrw for directory opening
     open_for_directories = false,
     keymaps = {
       show_help = "<f1>",
     },
   },
-  -- 👇 if you use `open_for_directories=true`, this is recommended
   init = function()
-    -- More details: https://github.com/mikavilpas/yazi.nvim/issues/802
-    -- vim.g.loaded_netrw = 1
+    -- Disable netrw plugin to avoid conflicts
     vim.g.loaded_netrwPlugin = 1
   end,
 }
