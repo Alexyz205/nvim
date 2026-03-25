@@ -1,5 +1,6 @@
 # Neovim data and cache directories
 # These contain runtime data and should not be tracked
 .repro/
+lazy-lock.json
 debug/
 doc/tags
