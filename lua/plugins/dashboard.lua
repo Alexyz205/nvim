@@ -1,116 +1,202 @@
 return {
-  "folke/snacks.nvim",
-  ---@type snacks.Config
-  opts = {
-    dashboard = {
-      -- Dashboard configuration
-      width = 60,
-      row = nil,                                                                   -- dashboard position. nil for center
-      col = nil,                                                                   -- dashboard position. nil for center
-      pane_gap = 4,                                                                -- empty columns between vertical panes
-      autokeys = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", -- autokey sequence
-      -- These settings are used by some built-in sections
-      preset = {
-        ---@type snacks.dashboard.Item[]
-        keys = {
-          { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
-          { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
-          { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
-          { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
-          {
-            icon = " ",
-            key = "c" ,
-            desc = "Config",
-            action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
-          },
-          { icon = " ", key = "s", desc = "Restore Session", section = "session" },
-          { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
-          { icon = " ", key = "q", desc = "Quit", action = ":qa" },
-        },
-        -- Used by the `header` section
-        header = [[
+	"folke/snacks.nvim",
+	---@type snacks.Config
+	opts = {
+		dashboard = {
+			width = 60,
+			row = nil,
+			col = nil,
+			pane_gap = 4,
+			autokeys = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+			preset = {
+				---@type snacks.dashboard.Item[]
+				keys = {
+					{ icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+					{ icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+					{
+						icon = " ",
+						key = "g",
+						desc = "Find Text",
+						action = ":lua Snacks.dashboard.pick('live_grep')",
+					},
+					{
+						icon = " ",
+						key = "r",
+						desc = "Recent Files",
+						action = ":lua Snacks.dashboard.pick('oldfiles')",
+					},
+					{
+						icon = " ",
+						key = "c",
+						desc = "Config",
+						action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
+					},
+					{ icon = " ", key = "s", desc = "Restore Session", section = "session" },
+					{
+						icon = "󰒲 ",
+						key = "l",
+						desc = "Lazy",
+						action = ":Lazy",
+						enabled = package.loaded.lazy ~= nil,
+					},
+					{ icon = " ", key = "q", desc = "Quit", action = ":qa" },
+				},
+				header = [[
       █████╗ ██╗     ███████╗██╗  ██╗██╗   ██╗███████╗
       ██╔══██╗██║     ██╔════╝╚██╗██╔╝╚██╗ ██╔╝╚══███╔╝
     ███████║██║     █████╗   ╚███╔╝  ╚████╔╝   ███╔╝
     ██╔══██║██║     ██╔══╝   ██╔██╗   ╚██╔╝   ███╔╝
       ██║  ██║███████╗███████╗██╔╝ ██╗   ██║   ███████╗
       ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝]],
-      },
-      sections = {
-        { section = "header" },
-        { section = "keys", gap = 1, padding = 1 },
+			},
+			sections = {
+				{ section = "header" },
+				{ section = "keys", gap = 1, padding = 1 },
 
-        -- GitLab MR shortcuts
-        { icon = " ", title = "GitLab", padding = { 0, 1 }, indent = 2 },
-        {
-          key = "mc",
-          icon = "󱓻 ",
-          desc = "Choose Merge Request",
-          indent = 2,
-          action = function() require("gitlab").choose_merge_request() end,
-        },
-        {
-          key = "mC",
-          icon = "󱓼 ",
-          desc = "Create Merge Request",
-          indent = 2,
-          padding = 1,
-          action = function() require("gitlab").create_mr() end,
-        },
+				-- Quick GitLab action shortcuts (pane 1)
+				{ icon = " ", title = "GitLab Actions", padding = { 0, 1 }, indent = 2 },
+				{
+					icon = " ",
+					key = "a",
+					desc = "Approve MR",
+					indent = 2,
+					action = function()
+						require("gitlab").approve()
+					end,
+				},
+				{
+					icon = " ",
+					key = "A",
+					desc = "Revoke Approval",
+					indent = 2,
+					action = function()
+						require("gitlab").revoke()
+					end,
+				},
+				{
+					icon = "󰁪 ",
+					key = "S",
+					desc = "MR Summary",
+					indent = 2,
+					action = function()
+						require("gitlab").summary()
+					end,
+				},
+				{
+					icon = "󰑬 ",
+					key = "i",
+					desc = "Pipeline",
+					indent = 2,
+					action = function()
+						require("gitlab").pipeline()
+					end,
+				},
+				{
+					icon = "󰙵 ",
+					key = "d",
+					desc = "Discussions",
+					indent = 2,
+					action = function()
+						require("gitlab").toggle_discussions()
+					end,
+				},
+				{
+					icon = "󰈙 ",
+					key = "o",
+					desc = "Open in Browser",
+					indent = 2,
+					action = function()
+						require("gitlab").open_in_browser()
+					end,
+				},
+				{
+					icon = "󰖟 ",
+					key = "u",
+					desc = "Copy MR URL",
+					indent = 2,
+					action = function()
+						require("gitlab").copy_mr_url()
+					end,
+				},
+				{
+					icon = "󰊤 ",
+					key = "C",
+					desc = "Choose MR",
+					indent = 2,
+					action = function()
+						require("gitlab").choose_merge_request()
+					end,
+				},
+				{
+					icon = "󱓼 ",
+					key = "N",
+					desc = "Create MR",
+					indent = 2,
+					padding = 1,
+					action = function()
+						require("gitlab").create_mr()
+					end,
+				},
 
-        {
-          pane = 2,
-          icon = "󰊢 ",
-          title = "Git Status",
-          section = "terminal",
-          enabled = function()
-            return Snacks.git.get_root() ~= nil
-          end,
-          cmd = "git status --short --branch --renames",
-          height = 5,
-          padding = 1,
-          ttl = 5 * 60,
-          indent = 3,
-        },
+				{
+					pane = 2,
+					icon = "󰊢 ",
+					title = "Git Status",
+					section = "terminal",
+					enabled = function()
+						return Snacks.git.get_root() ~= nil
+					end,
+					cmd = "git status --short --branch --renames",
+					height = 5,
+					padding = 1,
+					ttl = 5 * 60,
+					indent = 3,
+				},
 
-        {
-          pane = 2,
-          icon = " ",
-          title = "Merge Requests",
-          section = "terminal",
-          enabled = function()
-            return Snacks.git.get_root() ~= nil
-          end,
-          cmd = "glab mr list --author=@me -P5 2>/dev/null || echo 'No GitLab remote or token configured'",
-          height = 7,
-          padding = 1,
-          ttl = 5 * 60,
-          indent = 3,
-        },
+				{
+					pane = 2,
+					icon = " ",
+					title = "My Merge Requests",
+					section = "terminal",
+					enabled = function()
+						if not Snacks.git.get_root() then
+							return false
+						end
+						return vim.fn.system("git remote get-url origin 2>/dev/null"):lower():find("git.dxyz.pro")
+					end,
+					cmd = "glab mr list --author=@me -P5 2>/dev/null | sed '/^Showing/d' || echo 'No GitLab remote or token configured'",
+					height = 7,
+					padding = 1,
+					ttl = 5 * 60,
+					indent = 3,
+				},
 
-        {
-          pane = 2,
-          icon = " ",
-          title = "Pipelines",
-          section = "terminal",
-          enabled = function()
-            return Snacks.git.get_root() ~= nil
-          end,
-          cmd = "glab ci list -P5 2>/dev/null || echo 'No GitLab remote or token configured'",
-          height = 7,
-          padding = 1,
-          ttl = 5 * 60,
-          indent = 3,
-        },
+				{
+					pane = 2,
+					icon = " ",
+					title = "Pipelines",
+					section = "terminal",
+					enabled = function()
+						if not Snacks.git.get_root() then
+							return false
+						end
+						return vim.fn.system("git remote get-url origin 2>/dev/null"):lower():find("git.dxyz.pro")
+					end,
+					cmd = "glab ci list -P5 2>/dev/null | sed '/^Showing/d;/^$/d' || echo 'No GitLab remote or token configured'",
+					height = 7,
+					padding = 1,
+					ttl = 5 * 60,
+					indent = 3,
+				},
 
-        { pane = 2, icon = "󰋚 ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
+				{ pane = 2, icon = "󰋚 ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
 
-        { pane = 2, icon = "󰏗 ", title = "Projects", section = "projects", indent = 2, padding = 1 },
+				{ pane = 2, icon = "󰏗 ", title = "Projects", section = "projects", indent = 2, padding = 1 },
 
-        { pane = 2, icon = "🚀", title = "Powered by Alexis Pigeon", indent = 2, padding = 1 },
+				{ pane = 2, icon = "🚀", title = "Powered by Alexis Pigeon", indent = 2, padding = 1 },
 
-        { section = "startup" },
-      },
-    }
-  }
+				{ section = "startup" },
+			},
+		},
+	},
 }
