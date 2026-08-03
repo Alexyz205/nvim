@@ -65,47 +65,11 @@ opt.updatetime = 50 -- Faster completion and diagnostics (default: 4000ms)
 opt.isfname:append("@-@") -- Include @ in filenames
 
 -- ============================================================================
--- Clipboard Configuration (OSC 52 for DevPod/SSH)
+-- Clipboard Configuration (OSC 52 works over SSH/DevPod and in terminals)
 -- ============================================================================
 
 vim.opt.clipboard = "unnamedplus"
-
-local ok, osc52 = pcall(require, "vim.ui.clipboard.osc52")
-
-if ok then
-	local function system_paste()
-		for _, cmd in ipairs({
-			{ "xclip", "-o", "-selection", "clipboard" },
-			{ "wl-paste" },
-		}) do
-			if vim.fn.executable(cmd[1]) == 1 then
-				local buf = vim.fn.system(cmd)
-				if vim.v.shell_error == 0 and buf ~= "" then
-					return vim.split(vim.trim(buf), "\n"), "V"
-				end
-			end
-		end
-		if vim.env.TMUX then
-			local buf = vim.fn.system({ "tmux", "show-buffer" })
-			if vim.v.shell_error == 0 and buf ~= "" then
-				return vim.split(vim.trim(buf), "\n"), "V"
-			end
-		end
-		return osc52.paste("+")()
-	end
-
-	vim.g.clipboard = {
-		name = "OSC52",
-		copy = {
-			["+"] = osc52.copy("+"),
-			["*"] = osc52.copy("*"),
-		},
-		paste = {
-			["+"] = system_paste,
-			["*"] = system_paste,
-		},
-	}
-end
+vim.g.clipboard = "osc52"
 
 -- ============================================================================
 -- Notes
